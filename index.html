@@ -97,11 +97,40 @@
       })();
     </script>
     <script>
+      function tryOpenApp(link) {
+        var iframe = document.createElement("iframe");
+        iframe.style.border = "none";
+        iframe.style.width = "1px";
+        iframe.style.height = "1px";
+        iframe.src = link;
+        document.body.appendChild(iframe);
+      }
+    </script>
+    <script>
+      function getQueryStringObject() {
+        var a = window.location.search.substr(1).split("&");
+        if (a == "") return {};
+        var b = {};
+        for (var i = 0; i < a.length; ++i) {
+          var p = a[i].split("=", 2);
+          if (p.length == 1) b[p[0]] = "";
+          else b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        }
+        return b;
+      }
+
+      const { board, pid } = getQueryStringObject();
+
+      var baseUrl = "https://community-test.cashdoc.me";
       var isIPhone = isMobile.apple.phone;
       var isAndPhone = isMobile.android.phone;
 
       function redirectToPost() {
-        location.href = "https://community-test.cashdoc.me/community/208818";
+        if (board && pid) {
+          location.href = `${baseUrl}/${board}/${pid}`;
+        } else {
+          alert("잘못된 공유링크입니다.");
+        }
       }
 
       if (isIPhone || isAndPhone) {
@@ -111,9 +140,9 @@
         }, 1000);
 
         if (isIPhone) {
-          location.href = "naversearchapp://default?version=1";
+          tryOpenApp("naversearchapp://default?version=1");
         } else {
-          location.href = "naversearchapp://default?version=5";
+          tryOpenApp("naversearchapp://default?version=5");
         }
       } else {
         alert("설치 가능 기기가 아님");
