@@ -3,11 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <title>게시글 공유 브릿지</title>
-    <style>
-      #text {
-        text-align: center;
-      }
-    </style>
     <script>
       (function () {
         var a = {};
@@ -98,12 +93,14 @@
     </script>
     <script>
       function tryOpenApp(link) {
-        var iframe = document.createElement("iframe");
-        iframe.style.border = "none";
-        iframe.style.width = "1px";
-        iframe.style.height = "1px";
-        iframe.src = link;
-        document.body.appendChild(iframe);
+        // var iframe = document.createElement("iframe");
+        // iframe.style.border = "none";
+        // iframe.style.width = "1px";
+        // iframe.style.height = "1px";
+        // iframe.src = link;
+        // document.body.appendChild(iframe);
+
+        window.open(link, "_system");
       }
     </script>
     <script>
@@ -150,7 +147,5 @@
       }
     </script>
   </head>
-  <body>
-    <div id="text">게시글 공유 브릿지</div>
-  </body>
+  <body></body>
 </html>
