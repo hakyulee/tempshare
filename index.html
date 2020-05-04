@@ -96,17 +96,13 @@
     <script>
       function tryOpenApp(link) {
         const appLoader = new AppLoader();
-
         appLoader.exec({
           ios: {
             scheme: link,
-            url: "https://itunes.apple.com/kr/app/id924292102",
             useIOS9: true,
-            syncToIOS9: false,
+            syncToIOS9: true,
           },
-          notFoundCallback: function () {
-            console.log("Not Found Application");
-          },
+          notFoundCallback: function () {},
         });
       }
     </script>
@@ -122,10 +118,9 @@
         }
         return b;
       }
+      const { board, pid } = getQueryStringObject();
 
       const AppLoader = tui.AppLoader;
-
-      const { board, pid } = getQueryStringObject();
 
       var baseUrl = "https://community-test.cashdoc.me";
       var isIPhone = isMobile.apple.phone;
@@ -146,10 +141,9 @@
         }, 1000);
 
         if (isIPhone) {
-          location.href = "naversearchapp://default?version=1";
+          tryOpenApp("naversearchapp://default?version=1");
         } else {
-          tryOpenApp("naversearchapp://default?version=5");
-          // location.href = "naversearchapp://default?version=5";
+          location.href = "naversearchapp://default?version=5";
         }
       } else {
         alert("설치 가능 기기가 아님");
