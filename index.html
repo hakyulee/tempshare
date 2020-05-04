@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>게시글 공유 브릿지</title>
     <script>
       (function () {
@@ -137,9 +137,12 @@
         }, 1000);
 
         if (isIPhone) {
-          tryOpenApp("naversearchapp://default?version=1");
+          // tryOpenApp("naversearchapp://default?version=1");
+
+          location.href = "naversearchapp://default?version=1";
         } else {
-          tryOpenApp("naversearchapp://default?version=5");
+          // tryOpenApp("naversearchapp://default?version=5");
+          location.href = "naversearchapp://default?version=5";
         }
       } else {
         alert("설치 가능 기기가 아님");
