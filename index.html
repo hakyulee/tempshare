@@ -3,6 +3,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>게시글 공유 브릿지</title>
+    <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0/dist/ua-parser.min.js"></script>
+    <script src="https://uicdn.toast.com/tui-app-loader/latest/tui-app-loader.js"></script>
     <script>
       (function () {
         var a = {};
@@ -93,14 +95,19 @@
     </script>
     <script>
       function tryOpenApp(link) {
-        // var iframe = document.createElement("iframe");
-        // iframe.style.border = "none";
-        // iframe.style.width = "1px";
-        // iframe.style.height = "1px";
-        // iframe.src = link;
-        // document.body.appendChild(iframe);
+        const appLoader = new AppLoader();
 
-        window.open(link, "_system");
+        appLoader.exec({
+          ios: {
+            scheme: link,
+            url: "https://itunes.apple.com/kr/app/id924292102",
+            useIOS9: true,
+            syncToIOS9: false,
+          },
+          notFoundCallback: function () {
+            console.log("Not Found Application");
+          },
+        });
       }
     </script>
     <script>
@@ -115,6 +122,8 @@
         }
         return b;
       }
+
+      const AppLoader = tui.AppLoader;
 
       const { board, pid } = getQueryStringObject();
 
@@ -133,16 +142,14 @@
       if (isIPhone || isAndPhone) {
         setTimeout(() => {
           alert("앱 미설치");
-          redirectToPost();
+          // redirectToPost();
         }, 1000);
 
         if (isIPhone) {
-          // tryOpenApp("naversearchapp://default?version=1");
-
           location.href = "naversearchapp://default?version=1";
         } else {
-          // tryOpenApp("naversearchapp://default?version=5");
-          location.href = "naversearchapp://default?version=5";
+          tryOpenApp("naversearchapp://default?version=5");
+          // location.href = "naversearchapp://default?version=5";
         }
       } else {
         alert("설치 가능 기기가 아님");
