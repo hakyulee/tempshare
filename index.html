@@ -94,21 +94,8 @@
       })();
     </script>
     <script>
-      function tryOpenApp(link) {
-        const appLoader = new AppLoader();
-        // safari는 앱 미설치시 불필요한 alert이 발생
-        // tui-app-loader를 사용해 호출해서 해당 action을 방지
-        appLoader.exec({
-          ios: {
-            scheme: link,
-            useIOS9: true,
-            syncToIOS9: true,
-          },
-          notFoundCallback: function () {},
-        });
-      }
-    </script>
-    <script>
+      window.alert = () => {};
+
       function getQueryStringObject() {
         var a = window.location.search.substr(1).split("&");
         if (a == "") return {};
@@ -138,12 +125,11 @@
 
       if (isIPhone || isAndPhone) {
         setTimeout(() => {
-          alert("앱 미설치");
           redirectToPost();
-        }, 1000);
+        }, 50);
 
         if (isIPhone) {
-          tryOpenApp("naversearchapp://default?version=1");
+          location.href = "naversearchapp://default?version=1";
         } else {
           location.href = "naversearchapp://default?version=5";
         }
