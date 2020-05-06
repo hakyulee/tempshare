@@ -102,8 +102,6 @@
       var payload = window.location.search.split("payload=")[1];
       var decodedPayload = decodeURIComponent(decodeURIComponent(payload));
 
-      console.log(decodedPayload);
-      alert(JSON.stringify(decodedPayload));
       const { board, pid } = decodedPayload;
 
       var baseUrl = "https://community-test.cashdoc.me";
