@@ -9,6 +9,9 @@
       property="og:image"
       content="https://community-api.cashdoc.me/attachments/4227"
     />
+    <meta name="twitter:title" content="뿌린만큼 거두리라" />
+    <meta name="twitter:description" content="호국의 요람" />
+    <meta name="twitter:site" content="http://chrisphotography.me" />
     <title>캐시닥 커뮤니티</title>
     <script>
       (function () {
@@ -102,7 +105,9 @@
       var payload = window.location.search.split("payload=")[1];
       var decodedPayload = decodeURIComponent(decodeURIComponent(payload));
 
-      const { board, pid } = JSON.parse(decodedPayload);
+      const { env, board, description, image, pid, title } = JSON.parse(
+        decodedPayload
+      );
 
       var baseUrl = "https://community-test.cashdoc.me";
       var isIPhone = isMobile.apple.phone;
