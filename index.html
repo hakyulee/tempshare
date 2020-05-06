@@ -102,7 +102,7 @@
       var payload = window.location.search.split("payload=")[1];
       var decodedPayload = decodeURIComponent(decodeURIComponent(payload));
 
-      const { board, pid } = decodedPayload;
+      const { board, pid } = JSON.parse(decodedPayload);
 
       var baseUrl = "https://community-test.cashdoc.me";
       var isIPhone = isMobile.apple.phone;
@@ -110,7 +110,7 @@
 
       function redirectToPost() {
         if (board && pid) {
-          // location.href = `${baseUrl}/${board}/${pid}`;
+          location.href = `${baseUrl}/${board}/${pid}`;
         } else {
           alert("잘못된 공유링크입니다.");
         }
